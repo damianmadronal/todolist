@@ -3,6 +3,7 @@ include("head.php");
 
 $stmt = $conn->prepare("SELECT * FROM list");
 $stmt->execute();
+
 ?>
 
 <body>
@@ -19,20 +20,19 @@ $stmt->execute();
                     </thead>
                     <tbody>
                         <?php
-                        if ($stmt->setFetchMode(PDO::FETCH_ASSOC)) {
-                            foreach ($stmt->fetchAll() as $list) {
+                        foreach ($stmt->fetchAll() as $list) {
                         ?>
-                                <tr>
-                                    <th scope="row"><a class="text-primary" href="list/index.php/?id=<?= $list['id']; ?>"><?= $list['id'] ?></a></th>
-                                    <td><a href="#"><?= $list['name'] ?></a></td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-primary"><a href="list/update.php/?id=<?= $list['id'] ?>">Edit</a></button>
-                                            <button class="btn btn-danger"><a href="list/delete.php/?id=<?= $list['id'] ?>">Delete</a></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                        <?php }
+                            <tr>
+                                <th scope="row"><a class="text-primary" href="list/index.php/?id=<?= $list['id']; ?>"><?= $list['id'] ?></a></th>
+                                <td><a href="#"><?= $list['name'] ?></a></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary"><a href="list/update.php/?id=<?= $list['id'] ?>">Edit</a></button>
+                                        <button class="btn btn-danger"><a href="list/delete.php/?id=<?= $list['id'] ?>">Delete</a></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php
                         } ?>
                     </tbody>
                 </table>
