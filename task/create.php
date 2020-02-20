@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
                         ?>
                     </select>
                     <label for="duur" class="col-form-label">duur</label>
-                    <input required class="form-control" type="datetime-local" id="duur" name="duur">
+                    <input required class="form-control" type="time" id="duur" name="duur">
                 </div>
                 <button type="submit" name="submit" class="btn btn-primary">submit</button>
             </form>

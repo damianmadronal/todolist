@@ -31,7 +31,7 @@ $task = $stmt->fetch();
             <label for="name">Name</label>
             <input type="text" name="name" class="form-control" id="name" placeholder="Enter task name" value="<?= $task['name'] ?>" required>
             <label for="duur" class="col-form-label">duur</label>
-            <input required class="form-control" type="datetime-local" id="duur" name="duur" value="<?= $task['duur'] ?>">
+            <input required class="form-control" type="time" id="duur" name="duur" value="<?= $task['duur'] ?>">
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Edit</button>
     </form>
