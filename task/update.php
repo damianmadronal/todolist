@@ -8,11 +8,13 @@ $list_id = $_GET['list_id'];
 if (isset($_POST["submit"])) {
     $name = $_POST["name"];
     $duur = $_POST["duur"];
+    $status = $_POST["status"];
 
-    $stmt = $conn->prepare("UPDATE task SET name=:name, duur=:duur WHERE id=:id");
+    $stmt = $conn->prepare("UPDATE task SET name=:name, duur=:duur, status=:status WHERE id=:id");
     $stmt->bindParam(":id", $id);
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":duur", $duur);
+    $stmt->bindParam(":status", $status);
     $stmt->execute();
 
     header("Location: ../../list/index.php/?id=$list_id");
@@ -32,6 +34,11 @@ $task = $stmt->fetch();
             <input type="text" name="name" class="form-control" id="name" placeholder="Enter task name" value="<?= $task['name'] ?>" required>
             <label for="duur" class="col-form-label">duur</label>
             <input required class="form-control" type="time" id="duur" name="duur" value="<?= $task['duur'] ?>">
+            <label class="col-form-label" for="status">Status</label>
+            <select name="status" class="form-control form-control-sm" required>
+                <option value="0">uncompleted</option>
+                <option value="1">completed</option>
+            </select>
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Edit</button>
     </form>

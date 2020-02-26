@@ -3,7 +3,7 @@ include("../head.php");
 
 $id = $_GET['id'];
 
-$stmt = $conn->prepare("SELECT * FROM task where list_id=:id and status = 0");
+$stmt = $conn->prepare("SELECT * FROM task where list_id=:id");
 $stmt->bindParam(":id", $id);
 $stmt->execute();
 
@@ -13,13 +13,12 @@ $stmt2->execute();
 
 $list_id = $stmt2->fetch();
 
-
 ?>
 <div class="container">
     <div class="row">
         <div class="col">
             <button class="my-2 btn btn-primary"><a class="text-white" href="../../index.php">Home</a></button>
-            <h1>List: <?= $stmt2->fetch()['name'] ?></h1>
+            <h1>List: <?= $list_id['name'] ?></h1>
             <table class="table table-striped table-dark">
                 <thead>
                     <tr>
@@ -35,7 +34,12 @@ $list_id = $stmt2->fetch();
                         <tr>
                             <th scope="row"><?= $task['name'] ?></th>
                             <td><?= $task['duur'] ?></td>
-                            <td><?= $task['status'] ?></td>
+                            <td><?php
+                                if ($task['status'] == 0) {
+                                    echo "uncompleted";
+                                } else {
+                                    echo "completed";
+                                } ?></td>
                             <td>
                                 <div class="btn-group">
                                     <button class="btn btn-primary"><a class="text-white" href="../../task/update.php/?id=<?= $task['id'] ?>&list_id=<?= $list_id['id'] ?>">Edit</a></button>
