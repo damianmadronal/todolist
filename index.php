@@ -12,10 +12,13 @@ $stmt->execute();
             <div class="col">
                 <button class="btn btn-primary my-2"><a href="list/create.php">Add list</a></button>
                 <button class="btn btn-primary my-2"><a href="task/create.php">Add task</a></button>
+                <h1>Lists</h1>
                 <table class="table table-striped table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Lijsten</th>
+                            <th scope="col">list id</th>
+                            <th scope="col">name</th>
+                            <th scope="col">actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,7 +27,7 @@ $stmt->execute();
                         ?>
                             <tr>
                                 <th scope="row"><a class="text-primary" href="list/index.php/?id=<?= $list['id']; ?>"><?= $list['id'] ?></a></th>
-                                <td><a href="#"><?= $list['name'] ?></a></td>
+                                <td><a class="text-primary" href="list/index.php/?id=<?= $list['id']; ?>"><?= $list['name'] ?></a></td>
                                 <td>
                                     <div class="btn-group">
                                         <button class="btn btn-primary"><a href="list/update.php/?id=<?= $list['id'] ?>">Edit</a></button>

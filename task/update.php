@@ -7,12 +7,15 @@ $list_id = $_GET['list_id'];
 
 if (isset($_POST["submit"])) {
     $name = $_POST["name"];
+    $description = $_POST["description"];
     $duur = $_POST["duur"];
     $status = $_POST["status"];
 
-    $stmt = $conn->prepare("UPDATE task SET name=:name, duur=:duur, status=:status WHERE id=:id");
+    $stmt = $conn->prepare("UPDATE task SET name=:name, duur=:duur, status=:status, description=:description WHERE id=:id");
+
     $stmt->bindParam(":id", $id);
     $stmt->bindParam(":name", $name);
+    $stmt->bindParam(":description", $description);
     $stmt->bindParam(":duur", $duur);
     $stmt->bindParam(":status", $status);
     $stmt->execute();
@@ -32,6 +35,8 @@ $task = $stmt->fetch();
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" class="form-control" id="name" placeholder="Enter task name" value="<?= $task['name'] ?>" required>
+            <label for="name">Description</label>
+            <textarea type="text" name="description" class="form-control" id="description" placeholder="Enter description" rows="3" value="<?= $task['description'] ?>" required> </textarea>
             <label for="duur" class="col-form-label">duur</label>
             <input required class="form-control" type="time" id="duur" name="duur" value="<?= $task['duur'] ?>">
             <label class="col-form-label" for="status">Status</label>
@@ -40,7 +45,11 @@ $task = $stmt->fetch();
                 <option value="1">completed</option>
             </select>
         </div>
-        <button type="submit" name="submit" class="btn btn-primary">Edit</button>
+        <div class="button-group">
+            <button type="submit" name="submit" class="btn btn-primary">Edit</button>
+            <button type="submit" name="submit" class="btn btn-primary"><a class="text-white" href="../../index.php">cancel</a></button>
+        </div>
+
     </form>
 </div>
 

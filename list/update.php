@@ -27,7 +27,10 @@ $list = $stmt->fetch();
             <label for="name">Name</label>
             <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?= $list['name'] ?>" required>
         </div>
-        <button type="submit" name="submit" class="btn btn-primary">Edit</button>
+        <div class="button-group">
+            <button type="submit" name="submit" class="btn btn-primary">Edit</button>
+            <button type="submit" name="submit" class="btn btn-primary"><a class="text-white" href="../../index.php">cancel</a></button>
+        </div>
     </form>
 </div>
 
