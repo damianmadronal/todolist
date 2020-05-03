@@ -4,7 +4,6 @@ include("../head.php");
 $id = $_GET['id'];
 $list_id = $_GET['list_id'];
 
-
 if (isset($_POST["submit"])) {
     $name = $_POST["name"];
     $description = $_POST["description"];
