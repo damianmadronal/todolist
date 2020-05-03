@@ -1,9 +1,11 @@
 <?php
-include("head.php");
+require("connect.php");
+
 
 $stmt = $conn->prepare("SELECT * FROM list");
 $stmt->execute();
 
+include("head.php");
 ?>
 
 <body>

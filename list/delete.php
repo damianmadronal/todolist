@@ -1,5 +1,6 @@
 <?php
-include("../head.php");
+require("../connect.php");
+
 
 $id = $_GET['id'];
 
@@ -9,6 +10,7 @@ $stmt->execute();
 
 header("Location: ../../index.php");
 
+include("../head.php");
 
 ?>
 

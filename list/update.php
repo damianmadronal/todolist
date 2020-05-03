@@ -1,5 +1,6 @@
 <?php
-include("../head.php");
+require("../connect.php");
+
 
 $id = $_GET['id'];
 
@@ -19,6 +20,7 @@ $stmt->bindParam(":id", $id);
 $stmt->execute();
 
 $list = $stmt->fetch();
+include("../head.php");
 ?>
 
 <div class="container">

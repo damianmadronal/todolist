@@ -1,5 +1,6 @@
 <?php
-include("../head.php");
+require("../connect.php");
+
 
 $stmt = $conn->prepare("SELECT * FROM list");
 $stmt->execute();
@@ -20,6 +21,7 @@ if (isset($_POST['submit'])) {
     header("Location: ../list/index.php/?id=$list_id");
 }
 
+include("../head.php");
 ?>
 <div class="container">
     <div class="row">

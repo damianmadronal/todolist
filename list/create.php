@@ -1,5 +1,5 @@
 <?php
-include("../head.php");
+require("../connect.php");
 
 
 if (isset($_POST['submit'])) {
@@ -12,6 +12,7 @@ if (isset($_POST['submit'])) {
 
     header("Location: ../index.php");
 }
+include("../head.php");
 ?>
 <div class="container">
     <div class="row">

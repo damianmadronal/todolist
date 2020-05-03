@@ -1,5 +1,5 @@
 <?php
-include("../head.php");
+require("../connect.php");
 
 $id = $_GET['id'];
 
@@ -15,6 +15,7 @@ $stmt2->execute();
 $list_id = $stmt2->fetch();
 
 
+include("../head.php");
 ?>
 <div class="container">
     <div class="row">
