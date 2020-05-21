@@ -11,12 +11,3 @@ $stmt->bindParam(":id", $id);
 $stmt->execute();
 
 header("Location: ../../list/index.php/?id=$list_id");
-
-include("../head.php");
-
-?>
-
-
-<?php
-include("../footer.php")
-?>

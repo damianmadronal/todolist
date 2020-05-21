@@ -13,30 +13,31 @@ if (isset($_POST["submit"])) {
     $stmt->execute();
 
     header("Location: ../../index.php");
-}
+} else {
 
-$stmt = $conn->prepare("SELECT * FROM list WHERE id=:id");
-$stmt->bindParam(":id", $id);
-$stmt->execute();
+    $stmt = $conn->prepare("SELECT * FROM list WHERE id=:id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
 
-$list = $stmt->fetch();
-include("../head.php");
+    $list = $stmt->fetch();
+    include("../head.php");
 ?>
 
-<div class="container">
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . "?id=$id"); ?>" method="POST">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?= $list['name'] ?>" required>
-        </div>
-        <div class="button-group">
-            <button type="submit" name="submit" class="btn btn-primary">Edit</button>
-            <button type="submit" name="submit" class="btn btn-primary"><a class="text-white" href="../../index.php">cancel</a></button>
-        </div>
-    </form>
-</div>
+    <div class="container">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . "?id=$id"); ?>" method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="name" value="<?= $list['name'] ?>" required>
+            </div>
+            <div class="button-group">
+                <button type="submit" name="submit" class="btn btn-primary">Edit</button>
+                <button type="submit" name="submit" class="btn btn-primary"><a class="text-white" href="../../index.php">cancel</a></button>
+            </div>
+        </form>
+    </div>
 
 
 <?php
-include("../footer.php")
+    include("../footer.php");
+}
 ?>

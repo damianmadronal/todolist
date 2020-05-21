@@ -11,28 +11,29 @@ if (isset($_POST['submit'])) {
     $stmt->execute();
 
     header("Location: ../index.php");
-}
-include("../head.php");
+} else {
+    include("../head.php");
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter list name" required>
-                </div>
-                <div class="button-group">
-                    <button type="submit" name="submit" class="btn btn-primary">submit</button>
-                    <button type="submit" name="submit" class="btn btn-primary"><a class="text-white" href="../index.php">cancel</a></button>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Enter list name" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" name="submit" class="btn btn-primary">submit</button>
+                        <button type="submit" name="submit" class="btn btn-primary"><a class="text-white" href="../index.php">cancel</a></button>
+                    </div>
 
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 
 <?php
-include("../footer.php")
+    include("../footer.php");
+}
 ?>
