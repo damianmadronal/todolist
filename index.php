@@ -13,7 +13,6 @@ include("head.php");
         <div class="row">
             <div class="col">
                 <button class="btn btn-primary my-2"><a href="list/create.php">Add list</a></button>
-                <button class="btn btn-primary my-2"><a href="task/create.php">Add task</a></button>
                 <h1>Lists</h1>
                 <table class="table table-striped table-dark">
                     <thead>
@@ -28,8 +27,8 @@ include("head.php");
                         foreach ($stmt->fetchAll() as $list) {
                         ?>
                             <tr>
-                                <th scope="row"><a class="text-primary" href="list/index.php/?id=<?= $list['id']; ?>"><?= $list['id'] ?></a></th>
-                                <td><a class="text-primary" href="list/index.php/?id=<?= $list['id']; ?>"><?= $list['name'] ?></a></td>
+                                <th scope="row"><a class="text-primary" href="list/index.php/?id=<?= $list['id']; ?>&sort=up"><?= $list['id'] ?></a></th>
+                                <td><a class="text-primary" href="list/index.php/?id=<?= $list['id']; ?>&sort=up"><?= $list['name'] ?></a></td>
                                 <td>
                                     <div class="btn-group">
                                         <button class="btn btn-primary"><a href="list/update.php/?id=<?= $list['id'] ?>">Edit</a></button>

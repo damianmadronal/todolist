@@ -3,16 +3,28 @@ require("../connect.php");
 
 $id = $_GET['id'];
 
-$stmt = $conn->prepare("SELECT * FROM task where list_id=:id");
-$stmt->bindParam(":id", $id);
-$stmt->execute();
+$sort = $_GET['sort'];
 
+
+if ($sort == "up") {
+
+    $stmt = $conn->prepare("SELECT * FROM task where list_id=:id ORDER BY name ASC");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $tasks = $stmt->fetchAll();
+} else {
+
+    $stmt = $conn->prepare("SELECT * FROM task where list_id=:id ORDER BY name DESC");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $tasks = $stmt->fetchAll();
+}
 
 $stmt2 = $conn->prepare("SELECT * FROM list where id = :id");
 $stmt2->bindParam(":id", $id);
 $stmt2->execute();
 
-$list_id = $stmt2->fetch();
+$list = $stmt2->fetch();
 
 
 include("../head.php");
@@ -21,9 +33,11 @@ include("../head.php");
     <div class="row">
         <div class="col">
             <button class="my-2 btn btn-primary"><a class="text-white" href="../../index.php">Home</a></button>
+            <button class="btn btn-primary my-2"><a class="text-white" href="../../task/create.php/?list_id=<?= $list['id'] ?>">Add task</a></button>
+
             <div class="row">
                 <div class="col">
-                    <h1>List: <?= $list_id['name'] ?></h1>
+                    <h1>List: <?= $list['name'] ?></h1>
                 </div>
                 <div class="col">
                     <div class="button-group">
@@ -33,12 +47,10 @@ include("../head.php");
                     </div>
                 </div>
             </div>
-
-
             <table class="table table-striped table-dark">
                 <thead>
                     <tr>
-                        <th scope="col">name</th>
+                        <th onmouseover="" style="cursor: pointer;" id="name-sort" scope="col">name <i class="fas fa-arrow-<?= $sort ?>" id="arrow"></i></th>
                         <th scope="col">description</th>
                         <th scope="col">time</th>
                         <th scope="col">status</th>
@@ -47,7 +59,8 @@ include("../head.php");
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($stmt->fetchAll() as $task) {
+                    foreach ($tasks as $task) {
+
                     ?>
                         <tr class="listItem
                         <?php
@@ -94,12 +107,13 @@ include("../head.php");
                                 } ?></td>
                             <td>
                                 <div class="btn-group">
-                                    <button class="btn btn-primary"><a class="text-white" href="../../task/update.php/?id=<?= $task['id'] ?>&list_id=<?= $list_id['id'] ?>">Edit</a></button>
-                                    <button class="btn btn-danger"><a class="text-white" href="../../task/delete.php/?id=<?= $task['id'] ?>&list_id=<?= $list_id['id'] ?>">Delete</a></button>
+                                    <button class="btn btn-primary"><a class="text-white" href="../../task/update.php/?id=<?= $task['id'] ?>&list_id=<?= $list['id'] ?>">Edit</a></button>
+                                    <button class="btn btn-danger"><a class="text-white" href="../../task/delete.php/?id=<?= $task['id'] ?>&list_id=<?= $list['id'] ?>">Delete</a></button>
                                 </div>
                             </td>
                         </tr>
                     <?php
+
                     } ?>
                 </tbody>
             </table>
@@ -109,6 +123,7 @@ include("../head.php");
 
 
 <?php
+
 include("../footer.php")
 ?>
 
@@ -122,7 +137,15 @@ include("../footer.php")
         for (const list of lists) {
             list.hidden = true;
         }
-
-
     }
+
+    document.getElementById("name-sort").onclick = function() {
+        var arrow = document.getElementById("arrow");
+        var sort = "<?= $sort ?>";
+        if (sort == "up") {
+            window.location.href = "?id=<?= $id ?>&sort=down";
+        } else {
+            window.location.href = "?id=<?= $id ?>&sort=up";
+        }
+    };
 </script>
