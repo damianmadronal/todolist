@@ -3,22 +3,27 @@ require("../connect.php");
 
 $id = $_GET['id'];
 
-$sort = $_GET['sort'];
+if (isset($_GET['sort'])) {
+    $sort = $_GET['sort'];
+} else {
+    $sort = 'no';
+}
 
-
-if ($sort == "up") {
-
+if ($sort == 'up') {
     $stmt = $conn->prepare("SELECT * FROM task where list_id=:id ORDER BY name ASC");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    $tasks = $stmt->fetchAll();
-} else {
-
+} elseif ($sort == 'down') {
     $stmt = $conn->prepare("SELECT * FROM task where list_id=:id ORDER BY name DESC");
+
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    $tasks = $stmt->fetchAll();
+} else {
+    $stmt = $conn->prepare("SELECT * FROM task where list_id=:id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
 }
+$tasks = $stmt->fetchAll();
 
 $stmt2 = $conn->prepare("SELECT * FROM list where id = :id");
 $stmt2->bindParam(":id", $id);
@@ -142,6 +147,9 @@ include("../footer.php")
     document.getElementById("name-sort").onclick = function() {
         var arrow = document.getElementById("arrow");
         var sort = "<?= $sort ?>";
+        if (sort == "no") {
+            window.location.href = "?id=<?= $id ?>&sort=up";
+        }
         if (sort == "up") {
             window.location.href = "?id=<?= $id ?>&sort=down";
         } else {
