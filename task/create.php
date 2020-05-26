@@ -3,6 +3,8 @@ require("../connect.php");
 
 $list_id = $_GET['list_id'];
 
+$sort = $_GET['sort'];
+
 $stmt = $conn->prepare("SELECT * FROM list");
 $stmt->execute();
 
@@ -19,7 +21,7 @@ if (isset($_POST['submit'])) {
     $stmt->bindParam(":duur", $duur);
     $stmt->execute();
 
-    header("Location: ../../list/index.php/?id=$list_id");
+    header("Location: ../../list/index.php/?id=$list_id&sort=$sort");
 } else {
 
     include("../head.php");
@@ -27,7 +29,7 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <div class="row">
             <div class="col">
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . "?list_id=$list_id"); ?>" method="POST">
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . "?list_id=$list_id&sort=$sort"); ?>" method="POST">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" name="name" class="form-control" id="name" placeholder="Enter task name" required>
