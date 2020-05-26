@@ -5,6 +5,8 @@ $list_id = $_GET['list_id'];
 
 $sort = $_GET['sort'];
 
+$id = $_GET['id'];
+
 $stmt = $conn->prepare("SELECT * FROM list");
 $stmt->execute();
 
@@ -40,7 +42,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="button-group">
                         <button type="submit" name="submit" class="btn btn-primary">submit</button>
-                        <button type="submit" name="submit" class="btn btn-primary"><a class="text-white" href="../../list/index.php">cancel</a></button>
+                        <button type="submit" name="submit" class="btn btn-primary"><a class="text-white" href="../../list/index.php/?id=<?= $id ?>">cancel</a></button>
                     </div>
                 </form>
             </div>

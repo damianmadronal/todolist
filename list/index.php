@@ -38,7 +38,7 @@ include("../head.php");
     <div class="row">
         <div class="col">
             <button class="my-2 btn btn-primary"><a class="text-white" href="../../index.php">Home</a></button>
-            <button class="btn btn-primary my-2"><a class="text-white" href="../../task/create.php/?list_id=<?= $list['id'] ?>&sort=<?= $sort ?>">Add task</a></button>
+            <button class="btn btn-primary my-2"><a class="text-white" href="../../task/create.php/?list_id=<?= $list['id'] ?>&sort=<?= $sort ?>&id=<?= $id ?>">Add task</a></button>
 
             <div class="row">
                 <div class="col">

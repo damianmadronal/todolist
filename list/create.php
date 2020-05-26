@@ -1,9 +1,7 @@
 <?php
 require("../connect.php");
 
-
 if (isset($_POST['submit'])) {
-    echo "sadfkj";
     $name = $_POST["name"];
 
     $stmt = $conn->prepare("INSERT INTO list (name) VALUES (:name);");
